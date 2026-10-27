@@ -1,5 +1,6 @@
 import { app, dialog, ipcMain } from "electron";
 import { read } from "node-osr";
+import { join } from "path";
 
 async function userSelectDirectory(defaultPath: string) {
   const { canceled, filePaths } = await dialog.showOpenDialog({ defaultPath, properties: ["openDirectory"] });
@@ -28,7 +29,8 @@ function getPath(type: string) {
     case "logs":
       return app.getPath("logs");
     case "appResources":
-      return process.resourcesPath;
+      // In development `process.resourcesPath` points to Electron's own resources, not to the repository's `resources`
+      return app.isPackaged ? process.resourcesPath : join(process.cwd(), "resources");
   }
   return "";
 }

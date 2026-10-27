@@ -1,4 +1,5 @@
-import { StrictMode } from "react";
+// No <StrictMode>: its dev-only double effect run destroys the Pixi renderer (and loses the WebGL context of the
+// canvas) right before re-creating it on the same canvas, which crashes in `checkMaxIfStatementsInShader`.
 import { createRoot } from "react-dom/client";
 
 import { Provider } from "react-redux";
@@ -36,7 +37,7 @@ import { join } from "path";
   const container = document.getElementById("root") as HTMLElement;
   const root = createRoot(container);
   root.render(
-    <StrictMode>
+    <>
       <Provider store={store}>
         {/* Using `HashRouter` due to Electron https://github.com/remix-run/history/blob/dev/docs/api-reference.md#createhashhistory */}
         <HashRouter>
@@ -48,6 +49,6 @@ import { join } from "path";
           </ThemeProvider>
         </HashRouter>
       </Provider>
-    </StrictMode>,
+    </>,
   );
 })();

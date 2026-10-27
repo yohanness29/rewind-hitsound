@@ -3,8 +3,6 @@
 
 export const environment = {
   production: false,
-  debugAnalyzer: {
-    replayPath:
-      "D:/osu!/Replays/abstrakt - Bliitzit - Team Magma & Aqua Leader Battle Theme (Unofficial) [SMOKELIND's Insane] (2022-03-15) Osu.osr",
-  },
+  // Set a local .osr path here to have it loaded automatically when opening the analyzer
+  debugAnalyzer: undefined as { replayPath: string } | undefined,
 };
